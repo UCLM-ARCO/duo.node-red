@@ -11,8 +11,8 @@ module.exports = function(RED) {
 
 	var node = this;
 	var router_config = RED.nodes.getNode(config.router);
-	var ice_config = RED.nodes.getNode(config.ice);
-	var ic = ice_config.ic;
+	var ic_config = RED.nodes.getNode(config.ic);
+	var ic = ic_config.ic;
 
 	var observer = config.wires[0][0];
 	if (observer == undefined) {
@@ -22,7 +22,8 @@ module.exports = function(RED) {
 	}
 
 	// get proxy to IDM router
-	var router_prx = "ROUTER -o:tcp -h " + router_config.host + " -p " + router_config.port;
+	var router_prx = "ROUTER -e 1.0 -o:tcp -h "
+		       + router_config.host + " -p " + router_config.port;
 	var proxy = ic.stringToProxy(router_prx);
 
 	// create proxy to destination
@@ -40,7 +41,7 @@ module.exports = function(RED) {
 	    observer = str_to_address(addr);
 	    proxy.setObserver(observer)
 		 .then(function() {
-		     var msg = "ready";
+		     var msg = "observer set";
 		     node.status({fill: "green", shape: "ring", text: msg});
 		 })
 		 .exception(function(ex) {

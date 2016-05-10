@@ -6,7 +6,7 @@ module.exports = function(RED) {
  	RED.nodes.createNode(this, config);
     }
 
-    RED.nodes.registerType("bool-input", BoolNode);
+    RED.nodes.registerType("toggle in", BoolNode);
 
     RED.httpAdmin.post(
 	"/bool-input/:id",

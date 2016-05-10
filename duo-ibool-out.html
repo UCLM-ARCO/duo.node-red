@@ -1,12 +1,12 @@
 <script type="text/javascript">
- RED.nodes.registerType('IBool', {
+ RED.nodes.registerType('IBool out', {
      category: 'IDM',
      color: '#a6bb00',
      defaults: {
 	 name: {value: ""},
 	 addr: {value: "", required: true},
 	 router: {value: "", required: true, type: "idm-router"},
-	 ice: {value: "", required: true, type: "zeroc-ice"},
+	 ic: {value: "", required: true, type: "ice-communicator"},
      },
      inputs:1,
      outputs:0,
@@ -21,9 +21,9 @@
  });
 </script>
 
-<script type="text/x-red" data-template-name="IBool">
+<script type="text/x-red" data-template-name="IBool out">
  <div class="form-row">
-   <label for="node-input-addr"><i class="fa fa-fw fa-suitcase"></i> Destination: </label>
+   <label for="node-input-addr"><i class="fa fa-fw fa-suitcase"></i> Address: </label>
    <input type="text" id="node-input-addr" placeholder="aa:bb">
  </div>
 
@@ -32,23 +32,20 @@
    <input type="text" id="node-input-router">
  </div>
 
- <hr>
-
  <div class="form-row">
-   <label for="node-input-ice"><i class="fa fa-fw fa-gears"></i> ZeroC Ice: </label>
-   <input type="text" id="node-input-ice">
+   <label for="node-input-ic"><i class="fa fa-fw fa-gears"></i> Ice Comm.: </label>
+   <input type="text" id="node-input-ic">
  </div>
 </script>
 
-<script type="text/x-red" data-help-name="IBool">
+<script type="text/x-red" data-help-name="IBool out">
   <p>This node provides access to an IBool.W object, through IDM.</p>
-  <b>FIXME</b>: set encoding to 1.0<br>
 
   <p>It has three properties that should be set:</p>
   <ul>
-    <li><b>Destination</b>: the IDM address (like <code>10:01</code>)</li>
+    <li><b>Address</b>: the destination IDM address (like <code>10:01</code>)</li>
     <li><b>IDM Router</b>: the router to use</li>
-    <li><b>ZeroC Ice</b>: this is the ZeroC Ice communicator to be used</li>
+    <li><b>Ice Comm.</b>: this is the ZeroC Ice communicator to be used</li>
   </ul>
 
   <p>When an input with payload <code>true</code> or <code>false</code> is connected, it will

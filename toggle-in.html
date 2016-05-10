@@ -1,5 +1,5 @@
 <script type="text/javascript">
- RED.nodes.registerType('bool-input', {
+ RED.nodes.registerType('toggle in', {
      category: 'input',
      color: '#a6bb00',
      defaults: {
@@ -20,21 +20,21 @@
 	 },
      },
 
-     paletteLabel: "bool",
+     paletteLabel: "toggle",
      label: function() {
 	 return this.state ? "true" : "false";
      },
  });
 </script>
 
-<script type="text/x-red" data-template-name="bool-input">
+<script type="text/x-red" data-template-name="toggle in">
  <div class="form-row">
    <label for="node-input-name">Name: </label>
    <input type="text" id="node-input-name">
  </div>
 </script>
 
-<script type="text/x-red" data-help-name="bool-input">
+<script type="text/x-red" data-help-name="toggle in">
   <p>A simple toggle button to provide input from the Node-RED
   editor. It does not send a predefinded state, but changes its state
     on each click.</p>

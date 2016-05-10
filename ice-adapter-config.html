@@ -1,0 +1,26 @@
+<script type="text/javascript">
+ RED.nodes.registerType('ice-adapter', {
+     category: 'config',
+     defaults: {
+	 name: {value: ""},
+	 ic: {value: "", required: true},
+     },
+     label: function() {
+	 return this.name || "Ice Adapter";
+     },
+ });
+</script>
+
+<script type="text/x-red" data-template-name="ice-adapter">
+ <div class="form-row">
+   <label for="node-config-input-name"><i class="fa fa-fw fa-tag"></i> Name:</label>
+   <input type="text" id="node-config-input-name">
+ </div>
+
+ <hr>
+ <b>Note</b>: nested configs not supported on Node-RED.<br>Please, set here the <b>name</b> of your communicator.<br><br>
+ <div class="form-row">
+   <label for="node-config-input-ic"><i class="fa fa-fw fa-gears"></i> Ice Comm.:</label>
+   <input type="text" id="node-config-input-ic">
+ </div>
+</script>

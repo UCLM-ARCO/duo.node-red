@@ -8,8 +8,8 @@
   },
   "node-red": {
     "nodes": {
-      "IBool": "duo-bool.js",
-      "bool-input": "bool-input.js",
+      "IBool out": "duo-ibool-out.js",
+      "toggle in": "toggle-in.js",
       "idm-router": "idm-config.js"
     }
   },

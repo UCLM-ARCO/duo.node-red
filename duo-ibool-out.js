@@ -3,6 +3,7 @@ _ = console.info.bind(console);
 module.exports = function(RED) {
 
     // load duo_idm.ice
+    var Ice = require("ice").Ice;
     var DUO = require("duo_idm").DUO;
 
     function DUOIBoolClientNode(config) {
@@ -10,13 +11,14 @@ module.exports = function(RED) {
 	this.addr = config.addr.toUpperCase();
 
 	var router_config = RED.nodes.getNode(config.router);
-	var ice_config = RED.nodes.getNode(config.ice);
+	var ic_config = RED.nodes.getNode(config.ic);
 
-	// create communicator
-	var ic = ice_config.ic;
+	// get communicator
+	var ic = ic_config.ic;
 
 	// get proxy to IDM router
-	var router_prx = "ROUTER -o:tcp -h " + router_config.host + " -p " + router_config.port;
+	var router_prx = "ROUTER -e 1.0 -o:tcp -h "
+		       + router_config.host + " -p " + router_config.port;
 	var proxy = ic.stringToProxy(router_prx);
 
 	// create proxy to destination
@@ -34,5 +36,5 @@ module.exports = function(RED) {
 	});
     }
 
-    RED.nodes.registerType("IBool", DUOIBoolClientNode);
+    RED.nodes.registerType("IBool out", DUOIBoolClientNode);
 }
