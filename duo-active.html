@@ -1,0 +1,44 @@
+<script type="text/javascript">
+ RED.nodes.registerType('Active in', {
+     category: 'IDM',
+     color: '#2196F3',
+     defaults: {
+	 name: {value: ""},
+	 addr: {value: "", required: true},
+	 router: {value: "", required: true, type: "idm-router"},
+	 ice: {value: "", required: true, type: "zeroc-ice"},
+     },
+     inputs:0,
+     outputs:1,
+     icon: "chain.png",
+
+     label: function() {
+	 if (this.addr)
+	     return this.addr.toUpperCase();
+	 return this.name || "Active";
+     },
+ });
+</script>
+
+<script type="text/x-red" data-template-name="Active in">
+ <div class="form-row">
+   <label for="node-input-addr"><i class="fa fa-fw fa-suitcase"></i> Address: </label>
+   <input type="text" id="node-input-addr" placeholder="aa:bb">
+ </div>
+
+ <div class="form-row">
+   <label for="node-input-router"><i class="fa fa-fw fa-map-signs"></i> IDM Router: </label>
+   <input type="text" id="node-input-router">
+ </div>
+
+ <hr>
+
+ <div class="form-row">
+   <label for="node-input-ice"><i class="fa fa-fw fa-gears"></i> ZeroC Ice: </label>
+   <input type="text" id="node-input-ice">
+ </div>
+</script>
+
+<script type="text/x-red" data-help-name="Active in">
+  <p>DUO.Active.W node</p>
+</script>

@@ -2,31 +2,32 @@ _ = console.info.bind(console);
 
 module.exports = function(RED) {
 
-    // load Ice and duo_idm.ice
-    var Ice = require("ice").Ice;
+    // load duo_idm.ice
     var DUO = require("duo_idm").DUO;
 
     function DUOIBoolClientNode(config) {
 	RED.nodes.createNode(this, config);
+	this.addr = config.addr.toUpperCase();
+
 	var router_config = RED.nodes.getNode(config.router);
+	var ice_config = RED.nodes.getNode(config.ice);
 
 	// create communicator
-	var ic = Ice.initialize();
+	var ic = ice_config.ic;
 
 	// get proxy to IDM router
 	var router_prx = "ROUTER -o:tcp -h " + router_config.host + " -p " + router_config.port;
 	var proxy = ic.stringToProxy(router_prx);
 
 	// create proxy to destination
-	var dst_oid = config.dst.toUpperCase().replace(":", "");
-	dst_oid = ic.stringToIdentity(dst_oid);
-	proxy = proxy.ice_identity(dst_oid);
+	var addr_oid = this.addr.replace(":", "");
+	addr_oid = ic.stringToIdentity(addr_oid);
+	proxy = proxy.ice_identity(addr_oid);
 
 	// cast to DUO.IDM.IBool.W
 	proxy = DUO.IDM.IBool.WPrx.uncheckedCast(proxy);
-	this.log("using proxy: " + proxy.toString());
+	this.log(proxy.toString());
 
-	var node = this;
 	this.on('input', function(msg) {
 	    // call set(state) on proxy
 	    proxy.set(msg.payload, "");
