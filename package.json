@@ -10,7 +10,7 @@
     "nodes": {
       "IBool out": "duo-ibool-out.js",
       "toggle in": "toggle-in.js",
-      "idm-router": "idm-config.js"
+      "idm-router": "idm-router-config.js"
     }
   },
   "bundledDependencies": [

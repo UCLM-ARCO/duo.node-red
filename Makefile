@@ -1,8 +1,6 @@
 # -*- mode: makefile-gmake; coding: utf-8 -*-
 
-SLICE = duo_idm.ice
-
-vpath %.ice /usr/share/slice/duo
+SLICE_PATH = /usr/share/slice
 
 all:
 
@@ -10,18 +8,19 @@ run: depends
 	node-red -v
 
 # NOTE: install locally, because I'm having trouble with global installation
-depends: $(SLICE:%.ice=%.js)
+depends: slices
 	[ -d node_modules/ice ] || npm install ice
 
 # NOTE: install slice2js with: "sudo npm -g install slice2js"
-%.js: %.ice
+slices:
 	[ -d node_modules ] || mkdir node_modules
-	slice2js --output-dir node_modules -I/usr/share/slice $^
+	slice2js --output-dir node_modules -I$(SLICE_PATH) $(SLICE_PATH)/duo/duo_idm.ice
+	slice2js --output-dir node_modules utils/remote-adapter.ice
 
 	[ -d node_modules/idm ] || mkdir -p node_modules/idm
-	slice2js --output-dir node_modules/idm /usr/share/slice/idm/idm.ice
+	slice2js --output-dir node_modules/idm $(SLICE_PATH)/idm/idm.ice
 
-upload: clean $(SLICE:%.ice=%.js)
+upload: clean
 	npm publish
 
 .PHONY: clean

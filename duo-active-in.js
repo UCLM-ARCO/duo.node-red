@@ -22,9 +22,7 @@ module.exports = function(RED) {
 	}
 
 	// get proxy to IDM router
-	var router_prx = "ROUTER -e 1.0 -o:tcp -h "
-		       + router_config.host + " -p " + router_config.port;
-	var proxy = ic.stringToProxy(router_prx);
+	var proxy = router_config.get_proxy(ic);
 
 	// create proxy to destination
 	var dst_oid = this.addr.replace(":", "");

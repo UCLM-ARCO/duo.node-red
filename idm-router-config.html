@@ -3,6 +3,7 @@
      category: 'config',
      defaults: {
 	 name: {value: ""},
+	 addr: {value: "", required: true},
 	 host: {value: "", required: true},
 	 port: {value: "6140", required: true}
      },
@@ -18,11 +19,15 @@
    <input type="text" id="node-config-input-name">
  </div>
  <div class="form-row">
-   <label for="node-config-input-host"><i class="fa fa-fw fa-map-server"></i> Host:</label>
+   <label for="node-config-input-addr"><i class="fa fa-fw fa-suitcase"></i> Address:</label>
+   <input type="text" id="node-config-input-addr">
+ </div>
+ <div class="form-row">
+   <label for="node-config-input-host"><i class="fa fa-fw fa-server"></i> Host:</label>
    <input type="text" id="node-config-input-host">
  </div>
  <div class="form-row">
-   <label for="node-config-input-port"><i class="fa fa-fw fa-map-plug"></i> Port:</label>
+   <label for="node-config-input-port"><i class="fa fa-fw fa-plug"></i> Port:</label>
    <input type="text" id="node-config-input-port" placeholder="6140">
  </div>
 </script>
