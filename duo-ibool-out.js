@@ -1,10 +1,8 @@
 _ = console.info.bind(console);
 
-module.exports = function(RED) {
+var DUO = require("duo_idm").DUO;
 
-    // load duo_idm.ice
-    var Ice = require("ice").Ice;
-    var DUO = require("duo_idm").DUO;
+module.exports = function(RED) {
 
     function DUOIBoolClientNode(config) {
 	RED.nodes.createNode(this, config);

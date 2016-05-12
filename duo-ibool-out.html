@@ -14,9 +14,17 @@
      align: 'right',
 
      label: function() {
-	 if (this.addr)
-	     return this.addr.toUpperCase();
-	 return this.name || "IBool";
+	 var retval = "";
+	 if (this.name) {
+	     retval += this.name;
+	     if (this.addr)
+		 retval += " [" + this.addr + "]";
+	 }
+	 else if (this.addr)
+	     retval = this.addr.toUpperCase();
+	 else
+	     retval = "IBool";
+	 return retval;
      },
  });
 </script>
@@ -36,6 +44,11 @@
    <label for="node-input-ic"><i class="fa fa-fw fa-gears"></i> Ice Comm.: </label>
    <input type="text" id="node-input-ic">
  </div>
+
+ <div class="form-row">
+   <label for="node-input-name"><i class="fa fa-fw fa-tag"></i> Name: </label>
+   <input type="text" id="node-input-name">
+ </div>
 </script>
 
 <script type="text/x-red" data-help-name="IBool out">
@@ -48,8 +61,9 @@
     <li><b>Ice Comm.</b>: this is the ZeroC Ice communicator to be used</li>
   </ul>
 
-  <p>When an input with payload <code>true</code> or <code>false</code> is connected, it will
-    send a <b>set</b> message to the given destination</p>
+  <p>When an input with payload <code>true</code> or <code>false</code> is
+    connected, it will send a <b>set</b> message to the given destination</p>.
+  If payload is different, it will be coerced to <code>false</code>.
 
   <p>The <code>IBool.W</code> interface is the following:
     <pre>

@@ -15,11 +15,6 @@
 
 <script type="text/x-red" data-template-name="ice-adapter">
  <div class="form-row">
-   <label for="node-config-input-name"><i class="fa fa-fw fa-tag"></i> Name:</label>
-   <input type="text" id="node-config-input-name">
- </div>
-
- <div class="form-row">
    <label for="node-config-input-host"><i class="fa fa-fw fa-server"></i> Host:</label>
    <input type="text" id="node-config-input-host">
  </div>
@@ -29,10 +24,18 @@
    <input type="text" id="node-config-input-port">
  </div>
 
- <hr>
- <b>Note</b>: nested configs are not supported on Node-RED.<br>Please, set here the <b>name</b> of your communicator.<br><br>
+ <div class="form-tips">
+   <b>Note</b>: nested configs are not supported on Node-RED.<br>Please, set here the <b>name</b> of your communicator.<br><br>
+
  <div class="form-row">
    <label for="node-config-input-ic"><i class="fa fa-fw fa-gears"></i> Ice Comm.:</label>
    <input type="text" id="node-config-input-ic">
+ </div>
+
+ </div><br>
+
+ <div class="form-row">
+   <label for="node-config-input-name"><i class="fa fa-fw fa-tag"></i> Name:</label>
+   <input type="text" id="node-config-input-name">
  </div>
 </script>

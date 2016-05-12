@@ -11,7 +11,20 @@ module.exports = function(RED) {
 	},
 
 	set: function(value, source) {
-	    this.node.send({payload: value});
+	    source = this.address_to_string(source);
+	    this.node.send({payload: value, source: source});
+	},
+
+	address_to_string: function(addr) {
+	    var result = "";
+
+	    for (var i in addr.toString()) {
+		var c = addr[i].toString(16);
+		if ((c.length % 2) > 0)
+		    c = "0" + c;
+		result += c;
+	    }
+	    return result.toUpperCase();
 	},
     });
 

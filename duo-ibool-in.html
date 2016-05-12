@@ -13,9 +13,17 @@
      icon: "button.png",
 
      label: function() {
-	 if (this.addr)
-	     return this.addr.toUpperCase();
-	 return this.name || "IBool";
+	 var retval = "";
+	 if (this.name) {
+	     retval += this.name;
+	     if (this.addr)
+		 retval += " [" + this.addr + "]";
+	 }
+	 else if (this.addr)
+	     retval = this.addr.toUpperCase();
+	 else
+	     retval = "IBool";
+	 return retval;
      },
  });
 </script>
@@ -34,7 +42,12 @@
   <div class="form-row">
     <label for="node-input-adapter"><i class="fa fa-fw fa-gears"></i> Ice Adapter: </label>
     <input type="text" id="node-input-adapter">
-  </div>
+ </div>
+
+ <div class="form-row">
+   <label for="node-input-name"><i class="fa fa-fw fa-tag"></i> Name: </label>
+   <input type="text" id="node-input-name">
+ </div>
 </script>
 
 <script type="text/x-red" data-help-name="IBool in">
