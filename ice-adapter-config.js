@@ -63,8 +63,9 @@ function get_communicator_by_name(RED, name) {
 
     var info;
     RED.nodes.eachNode(function(n) {
-	if (!info && n.name == name)
+	if (! info && n.name == name) {
 	    info = n;
+	}
     });
 
     if (info) {
