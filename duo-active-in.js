@@ -33,7 +33,9 @@ module.exports = function(RED) {
 	proxy = DUO.IDM.Active.WPrx.uncheckedCast(proxy);
 	this.log(proxy.toString());
 
-	// delay invocation, wait for other nodes to be created
+	// delay invocation, wait for other nodes to be created (min: 100 ms)
+	var delay = 100 + parseInt(config.delay);
+	node.status({fill: "yellow", shape: "ring", text: "waiting..."});
 	setTimeout( function() {
 	    addr = RED.nodes.getNode(observer).addr;
 	    observer = str_to_address(addr);
@@ -47,7 +49,7 @@ module.exports = function(RED) {
 		     node.status({fill: "red", shape: "ring", text: msg});
 		     node.error(msg);
 		 });
-	}, 100);
+	}, delay);
     }
 
     function str_to_address(s) {
