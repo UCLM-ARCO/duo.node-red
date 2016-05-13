@@ -15,6 +15,10 @@ module.exports = function(RED) {
 	    return node.ic;
 	}
 
+	setTimeout(function() { on_communicator_ready(node, config); }, 100);
+    }
+
+    function on_communicator_ready(node, config) {
 	node.ic = get_communicator_by_name(RED, config.ic);
 	if (! node.ic) {
 	    node.error("Invalid communicator");
