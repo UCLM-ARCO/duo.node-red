@@ -20,7 +20,7 @@ slices:
 	[ -d node_modules/idm ] || mkdir -p node_modules/idm
 	slice2js --output-dir node_modules/idm $(SLICE_PATH)/idm/idm.ice
 
-upload: clean
+upload: clean slices
 	npm publish
 
 .PHONY: clean
