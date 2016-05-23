@@ -2,8 +2,10 @@ _ = console.info.bind(console);
 
 module.exports = function(RED) {
 
+    var topic = "";
     function BoolNode(config) {
  	RED.nodes.createNode(this, config);
+	topic = config.topic;
     }
 
     RED.nodes.registerType("toggle in", BoolNode);
@@ -17,7 +19,7 @@ module.exports = function(RED) {
             if (node == null)
 		res.sendStatus(404);
 
- 	    node.send({payload: req.body.state == "true"});
+ 	    node.send({payload: req.body.state == "true", topic: topic});
             res.sendStatus(200);
 	}
     );
