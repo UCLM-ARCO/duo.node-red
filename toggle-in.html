@@ -23,7 +23,12 @@
 
      paletteLabel: "toggle",
      label: function() {
-	 return this.state ? "true" : "false";
+	 var label = this.state ? "true" : "false";
+	 if (this.topic)
+	     label = this.topic + ":" + label;
+	 if (this.name)
+	     label = this.name + " [" + label + "]";
+	 return label;
      },
  });
 </script>
