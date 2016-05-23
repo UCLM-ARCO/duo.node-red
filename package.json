@@ -1,6 +1,6 @@
 {
   "name": "node-red-contrib-idm",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Nodes for IDM: configuration and DUO.IBool",
   "homepage": "https://bitbucket.org/arco_group/idm",
   "dependencies": {
@@ -20,8 +20,8 @@
     }
   },
   "bundledDependencies": [
-      "duo_idm.js",
-      "idm",
-      "remote-adapter.js"
+    "duo_idm.js",
+    "idm",
+    "remote-adapter.js"
   ]
 }

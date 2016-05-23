@@ -14,7 +14,7 @@
 	 toggle: "state",
 	 onclick: function() {
              $.ajax({
-		 url: "/bool-input/" + this.id,
+		 url: "bool-input/" + this.id,
 		 type: "POST",
 		 data: {state: this.state},
 	     });
