@@ -2,10 +2,11 @@
  RED.nodes.registerType('ice-adapter', {
      category: 'config',
      defaults: {
-	 name: {value: ""},
+	 name: {value: "adapter"},
 	 host: {value: "0.0.0.0", required: true},
 	 port: {value: "12345", required: true},
 	 ic: {value: "default", required: true},
+	 properties: {value: []},
      },
      label: function() {
 	 return this.name || "Ice Adapter";
@@ -14,28 +15,38 @@
 </script>
 
 <script type="text/x-red" data-template-name="ice-adapter">
- <div class="form-row">
-   <label for="node-config-input-host"><i class="fa fa-fw fa-server"></i> Host:</label>
-   <input type="text" id="node-config-input-host">
- </div>
+  <div class="form-row">
+    <label for="node-config-input-host"><i class="fa fa-fw fa-server"></i> Host:</label>
+    <input type="text" id="node-config-input-host">
+  </div>
 
- <div class="form-row">
-   <label for="node-config-input-port"><i class="fa fa-fw fa-plug"></i> Port:</label>
-   <input type="text" id="node-config-input-port">
- </div>
+  <div class="form-row">
+    <label for="node-config-input-port"><i class="fa fa-fw fa-plug"></i> Port:</label>
+    <input type="text" id="node-config-input-port">
+  </div>
 
- <div class="form-tips">
-   <b>Note</b>: nested configs are not supported on Node-RED.<br>Please, set here the <b>name</b> of your communicator.<br><br>
+  <div class="form-tips">
+    <b>Note</b>: nested configs are not supported on Node-RED.<br>Please, set here the <b>name</b> of your communicator.<br><br>
 
- <div class="form-row">
-   <label for="node-config-input-ic"><i class="fa fa-fw fa-gears"></i> Ice Comm.:</label>
-   <input type="text" id="node-config-input-ic">
- </div>
+    <div class="form-row">
+      <label for="node-config-input-ic"><i class="fa fa-fw fa-gears"></i> Ice Comm.:</label>
+      <input type="text" id="node-config-input-ic">
+    </div>
 
- </div><br>
+  </div>
 
- <div class="form-row">
-   <label for="node-config-input-name"><i class="fa fa-fw fa-tag"></i> Name:</label>
-   <input type="text" id="node-config-input-name">
- </div>
+  <div class="form-row node-input-properties-container-row" style="margin-bottom: 0px;">
+    <div id="node-input-properties-container-div"
+	 style="box-sizing: border-box; border-radius: 5px; height: 310px;
+		padding: 5px; border: 1px solid #ccc; overflow-y:scroll;">
+      <ol id="node-input-properties-container" style=" list-style-type:none; margin: 0;"></ol>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="form-row">
+    <label for="node-config-input-name"><i class="fa fa-fw fa-tag"></i> Name:</label>
+    <input type="text" id="node-config-input-name">
+  </div>
 </script>
