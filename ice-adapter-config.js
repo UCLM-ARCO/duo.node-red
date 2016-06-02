@@ -87,7 +87,7 @@ function get_communicator_by_name(RED, name) {
 function run_remote_adapter_service(node, host, port, props) {
     var pwd = path.dirname(__filename);
     var cmd = path.join(pwd, "utils/remote-adapter.py");
-    var args = ("--host " + host + " --port " + port).split(" ");
+    var args = ("--host " + host + " --port " + port + " --adapter-name " + node.name).split(" ");
     args.push("--properties");
     args.push(props);
 

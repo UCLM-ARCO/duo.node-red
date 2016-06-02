@@ -74,7 +74,7 @@ class Server(Ice.Application):
         time.sleep(0.5)
 
         endps = "tcp -h {} -p {}".format(self.args.host, self.args.port)
-        adapter = ic.createObjectAdapterWithEndpoints("Adapter", endps)
+        adapter = ic.createObjectAdapterWithEndpoints(self.args.adapter_name, endps)
         adapter.activate()
         adapter.add(RemoteAdapterI(adapter), ic.stringToIdentity("RemoteAdapter"))
 
@@ -89,6 +89,7 @@ class Server(Ice.Application):
         parser = ArgumentParser()
         parser.add_argument("--host", default="0.0.0.0")
         parser.add_argument("--port", type=int, default=12345)
+        parser.add_argument("--adapter-name", default="Adapter")
         parser.add_argument("--properties", default='[]')
 
         try:
