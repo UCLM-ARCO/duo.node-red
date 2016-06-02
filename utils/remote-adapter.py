@@ -5,6 +5,7 @@ import sys
 import os
 import Ice
 import time
+import json
 from argparse import ArgumentParser
 
 pwd = os.path.abspath(os.path.dirname(__file__))
@@ -64,6 +65,10 @@ class Server(Ice.Application):
             return -1
 
         ic = self.communicator()
+        props = ic.getProperties()
+        for p in json.loads(self.args.properties):
+            k, v = map(str, p.split("="))
+            props.setProperty(k, v)
 
         # NOTE: let the nodejs spawned process to be killed before we start again (on deploy)
         time.sleep(0.5)
@@ -84,6 +89,7 @@ class Server(Ice.Application):
         parser = ArgumentParser()
         parser.add_argument("--host", default="0.0.0.0")
         parser.add_argument("--port", type=int, default=12345)
+        parser.add_argument("--properties", default='[]')
 
         try:
             self.args = parser.parse_args(args[1:])

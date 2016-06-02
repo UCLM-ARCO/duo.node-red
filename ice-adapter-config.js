@@ -9,7 +9,10 @@ module.exports = function(RED) {
 
     function IceAdapterConfigNode(config) {
 	RED.nodes.createNode(this, config);
+
 	var node = this;
+	node.host = config.host;
+	node.port = config.port;
 
 	node.get_communicator = function() {
 	    return node.ic;
@@ -25,8 +28,10 @@ module.exports = function(RED) {
 	    return;
 	}
 
+	var props = clean_properties(node, config.properties);
 	var child;
-	run_remote_adapter_service(config.host, config.port, node)
+
+	run_remote_adapter_service(node, config.host, config.port, props)
 	    .then(function(child_) {
 		node.log("remote adapter running...");
 		child = child_;
@@ -79,10 +84,12 @@ function get_communicator_by_name(RED, name) {
     }
 }
 
-function run_remote_adapter_service(host, port, node) {
+function run_remote_adapter_service(node, host, port, props) {
     var pwd = path.dirname(__filename);
     var cmd = path.join(pwd, "utils/remote-adapter.py");
     var args = ("--host " + host + " --port " + port).split(" ");
+    args.push("--properties");
+    args.push(props);
 
     var retval = new Ice.Promise();
     var child = spawn(cmd, args);
@@ -90,6 +97,9 @@ function run_remote_adapter_service(host, port, node) {
     var notified = false;
     child.stdout.on('data', function(d) {
 	d = d.toString().trim();
+	// note: if no process spawned, uncomment this
+	// node.log(d);
+
 	if (notified)
 	    return;
 
@@ -109,6 +119,21 @@ function run_remote_adapter_service(host, port, node) {
     });
 
     return retval;
+}
+
+function clean_properties(node, props) {
+    var cleaned = [];
+    for (var i in props) {
+	var p = props[i].replace("${name}", node.name)
+			.replace("${port}", node.port)
+			.replace("${host}", node.host)
+			.trim();
+
+	if (p)
+	    cleaned.push(p);
+    }
+
+    return JSON.stringify(cleaned);
 }
 
 // --------------------------------------------------------------------------------

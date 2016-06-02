@@ -8,8 +8,53 @@
 	 ic: {value: "default", required: true},
 	 properties: {value: []},
      },
+
      label: function() {
 	 return this.name || "Ice Adapter";
+     },
+
+     oneditprepare: function() {
+	 var node = this;
+
+	 function addPropertyField(value) {
+	     var container = $('<li/>', {style: "background: #fff; margin: 0; border-bottom: 1px solid #eee"});
+	     var row = $('<div/>').appendTo(container);
+	     var finalspan = $('<span/>', {style: "float: right; margin-right: 5px;"}).appendTo(row);
+
+	     var valueField = $('<input/>', {class: "node-input-property-value", type:"text", style:"margin-left: 5px; width: 89%; height: 20px; font-size: 1em !important; padding: 3px; border: 0px", value: value}).appendTo(row);
+	     var deleteButton = $('<a/>', {href: "#", class:"editor-button editor-button-small", style: "margin-left: 5px;"}).appendTo(finalspan);
+	     $('<i/>', {class: "fa fa-remove"}).appendTo(deleteButton);
+
+	     $("#node-input-properties-container").append(container);
+
+	     deleteButton.click(function() {
+		 container.remove();
+	     });
+
+	     if (value === undefined)
+		 valueField.focus();
+	 }
+
+	 $('#node-input-add-property').click(function() {
+	     addPropertyField();
+	 });
+
+	 for (var i in node.properties) {
+             var property = node.properties[i];
+             addPropertyField(property);
+         }
+     },
+
+     oneditsave: function() {
+	 var node = this;
+	 var props = $('.node-input-property-value');
+	 node.properties = [];
+
+	 props.each(function(i) {
+	     var value = $(this).val().trim();
+	     if (value)
+		 node.properties.push(value);
+	 });
      },
  });
 </script>
@@ -26,24 +71,31 @@
   </div>
 
   <div class="form-tips">
+    <b>Note</b>: you can use <code>${name}</code>, <code>${host}</code> and <code>${port}</code> on
+    a property definition.
+  </div><br>
+
+  <div class="form-row node-input-properties-container-row" style="margin-bottom: 0px;">
+    <div id="node-input-properties-container-div"
+	 style="box-sizing: border-box; border-radius: 5px; height: 150px;
+		padding: 5px; border: 1px solid #ccc; overflow-y:scroll;">
+      <ol id="node-input-properties-container" style=" list-style-type:none; margin: 0;"></ol>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <a href="#" class="editor-button editor-button-small" id="node-input-add-property" style="margin-top: 4px;">
+      <i class="fa fa-fw fa-plus"></i>Add property</a>
+  </div>
+
+  <div class="form-tips">
     <b>Note</b>: nested configs are not supported on Node-RED.<br>Please, set here the <b>name</b> of your communicator.<br><br>
 
     <div class="form-row">
       <label for="node-config-input-ic"><i class="fa fa-fw fa-gears"></i> Ice Comm.:</label>
       <input type="text" id="node-config-input-ic">
     </div>
-
-  </div>
-
-  <div class="form-row node-input-properties-container-row" style="margin-bottom: 0px;">
-    <div id="node-input-properties-container-div"
-	 style="box-sizing: border-box; border-radius: 5px; height: 310px;
-		padding: 5px; border: 1px solid #ccc; overflow-y:scroll;">
-      <ol id="node-input-properties-container" style=" list-style-type:none; margin: 0;"></ol>
-    </div>
-  </div>
-
-  <br>
+  </div><br>
 
   <div class="form-row">
     <label for="node-config-input-name"><i class="fa fa-fw fa-tag"></i> Name:</label>
