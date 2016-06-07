@@ -16,8 +16,10 @@ module.exports = function(RED) {
 	function(req, res) {
 
             var node = RED.nodes.getNode(req.params.id);
-            if (node == null)
+            if (node == null) {
 		res.sendStatus(404);
+        return;
+        }
 
  	    node.send({payload: req.body.state == "true", topic: topic});
             res.sendStatus(200);
