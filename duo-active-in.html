@@ -7,6 +7,7 @@
 	 addr: {value: "", required: true},
 	 delay: {value: "0", required: true, validate: RED.validators.number()},
 	 router: {value: "", required: true, type: "idm-router"},
+	 wiring_service: {value: "", type: "duo-wiring-service"},
 	 ic: {value: "", required: true, type: "ice-communicator"},
      },
      inputs:0,
@@ -26,36 +27,54 @@
 	     retval = "Active";
 	 return retval;
      },
+
+     oneditprepare: function() {
+	 var node = this;
+	 console.info(node);
+	 RED.nodes.eachConfig(function(c) {
+	     if (!node.router) {
+		 if (c.type == "idm-router") {
+		     node.router = c;
+		     console.info("set router to:", c);
+		 }
+	     }
+	 });
+     },
  });
 </script>
 
 <script type="text/x-red" data-template-name="Active in">
- <div class="form-row">
-   <label for="node-input-addr"><i class="fa fa-fw fa-suitcase"></i> Address: </label>
-   <input type="text" id="node-input-addr" placeholder="aa:bb">
- </div>
+  <div class="form-row">
+    <label for="node-input-addr"><i class="fa fa-fw fa-suitcase"></i> Address: </label>
+    <input type="text" id="node-input-addr" placeholder="aa:bb">
+  </div>
 
- <div class="form-row">
-   <label for="node-input-router"><i class="fa fa-fw fa-map-signs"></i> IDM Router: </label>
-   <input type="text" id="node-input-router">
- </div>
+  <div class="form-row">
+    <label for="node-input-router"><i class="fa fa-fw fa-map-signs"></i> IDM Router: </label>
+    <input type="text" id="node-input-router">
+  </div>
 
- <div class="form-row">
-   <label for="node-input-ic"><i class="fa fa-fw fa-gears"></i> Ice Comm.: </label>
-   <input type="text" id="node-input-ic">
- </div>
+  <div class="form-row">
+    <label for="node-input-ic"><i class="fa fa-fw fa-gears"></i> Ice Comm.: </label>
+    <input type="text" id="node-input-ic">
+  </div>
 
- <div class="form-row">
-   <label for="node-input-delay"><i class="fa fa-fw fa-clock-o"></i> Delay: </label>
-   <input type="text" id="node-input-delay" style="width: 285px; margin-right: 5px"> ms.
- </div>
+  <div class="form-row">
+    <label for="node-input-delay"><i class="fa fa-fw fa-clock-o"></i> Delay: </label>
+    <input type="text" id="node-input-delay" style="width: 285px; margin-right: 5px"> ms.
+  </div>
 
- <div class="form-row">
-   <label for="node-input-name"><i class="fa fa-fw fa-tag"></i> Name: </label>
-   <input type="text" id="node-input-name">
- </div>
+  <div class="form-row">
+    <label for="node-input-wiring_service"><i class="fa fa-fw fa-share-alt"></i> Wiring Srv.: </label>
+    <input type="text" id="node-input-wiring_service">
+  </div>
+
+  <div class="form-row">
+    <label for="node-input-name"><i class="fa fa-fw fa-tag"></i> Name: </label>
+    <input type="text" id="node-input-name">
+  </div>
 </script>
 
 <script type="text/x-red" data-help-name="Active in">
-  <p>DUO.Active.W node</p>
+ <p>DUO.Active.W node</p>
 </script>

@@ -38,7 +38,7 @@ module.exports = function(RED) {
 	node.status({fill: "yellow", shape: "ring", text: "waiting..."});
 	setTimeout( function() {
 	    addr = RED.nodes.getNode(observer).addr;
-	    observer = str_to_address(addr);
+	    observer = string_to_address(addr);
 	    proxy.setObserver(observer)
 		 .then(function() {
 		     var msg = "observer set";
@@ -52,7 +52,7 @@ module.exports = function(RED) {
 	}, delay);
     }
 
-    function str_to_address(s) {
+    function string_to_address(s) {
 	var fields = s.split(":");
 	var addr = [];
 	for (var i in fields)
