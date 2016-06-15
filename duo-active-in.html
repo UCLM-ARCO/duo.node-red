@@ -7,7 +7,7 @@
 	 addr: {value: "", required: true},
 	 delay: {value: "0", required: true, validate: RED.validators.number()},
 	 router: {value: "", required: true, type: "idm-router"},
-	 wiring_service: {value: "", type: "duo-wiring-service"},
+	 wiring_service: {value: "", type: "duo-wiring-service", required: false},
 	 ic: {value: "", required: true, type: "ice-communicator"},
      },
      inputs:0,

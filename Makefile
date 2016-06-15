@@ -15,13 +15,14 @@ depends: slices
 slices:
 	[ -d node_modules ] || mkdir node_modules
 	slice2js --output-dir node_modules -I$(SLICE_PATH) $(SLICE_PATH)/duo/duo_idm.ice
+	slice2js --output-dir node_modules -I$(SLICE_PATH) $(SLICE_PATH)/duo/duo_wiring.ice
 	slice2js --output-dir node_modules utils/remote-adapter.ice
 
 	[ -d node_modules/idm ] || mkdir -p node_modules/idm
 	slice2js --output-dir node_modules/idm $(SLICE_PATH)/idm/idm.ice
 
 upload: clean slices
-	npm publish
+	npm --userconfig=~/.npmrc-uclm publish
 
 .PHONY: clean
 clean:
