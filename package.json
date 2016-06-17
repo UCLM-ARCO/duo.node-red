@@ -1,31 +1,29 @@
 {
-    "name": "node-red-contrib-idm",
-    "version": "0.2.0",
-    "description": "Nodes for IDM: configuration and DUO.IBool",
-    "homepage": "https://bitbucket.org/arco_group/idm",
-    "dependencies": {
-	"ice": ">=3.6.1"
-    },
-    "node-red": {
-	"nodes": {
-	    "Active in": "duo-active-in.js",
-	    "IBool in": "duo-ibool-in.js",
-	    "IBool out": "duo-ibool-out.js",
-	    "IInt in": "duo-iint-in.js",
-            "IInt out": "duo-iint-out.js",
-
-            "toggle in": "toggle-in.js",
-
-	    "ice-adapter": "ice-adapter-config.js",
-	    "ice-communicator": "ice-communicator-config.js",
-	    "idm-router": "idm-router-config.js",
-	    "duo-wiring-service": "duo-wiring-service-config.js"
-	}
-    },
-    "bundledDependencies": [
-	"duo_wiring.js",
-	"duo_idm.js",
-	"idm",
-	"remote-adapter.js"
-    ]
+  "name": "node-red-contrib-idm",
+  "version": "0.2.2",
+  "description": "Nodes for IDM: configuration and DUO.IBool",
+  "homepage": "https://bitbucket.org/arco_group/idm",
+  "dependencies": {
+    "ice": ">=3.6.1"
+  },
+  "node-red": {
+    "nodes": {
+      "Active in": "duo-active-in.js",
+      "IBool in": "duo-ibool-in.js",
+      "IBool out": "duo-ibool-out.js",
+      "IInt in": "duo-iint-in.js",
+      "IInt out": "duo-iint-out.js",
+      "toggle in": "toggle-in.js",
+      "ice-adapter": "ice-adapter-config.js",
+      "ice-communicator": "ice-communicator-config.js",
+      "idm-router": "idm-router-config.js",
+      "duo-wiring-service": "duo-wiring-service-config.js"
+    }
+  },
+  "bundledDependencies": [
+    "duo_wiring.js",
+    "duo_idm.js",
+    "idm",
+    "remote-adapter.js"
+  ]
 }

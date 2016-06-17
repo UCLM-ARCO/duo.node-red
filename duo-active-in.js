@@ -6,12 +6,11 @@ module.exports = function(RED) {
     // load duo_idm.ice
     var DUO = require("duo_idm").DUO;
 
-    var node;
     function DUOActiveInputNode(config) {
 	RED.nodes.createNode(this, config);
 	this.addr = config.addr.toUpperCase();
 
-	node = this;
+	var node = this;
 	node.status({fill: "yellow", shape: "ring", text: "waiting..."});
 
 	var ic_config = RED.nodes.getNode(config.ic);
@@ -25,8 +24,10 @@ module.exports = function(RED) {
 	}
 
 	// get proxy to Wiring Service
+	var wiring = null;
 	var wiring_config = RED.nodes.getNode(config.wiring_service);
-	var wiring = wiring_config.get_proxy(ic);
+	if (wiring_config)
+	    var wiring = wiring_config.get_proxy(ic);
 
 	// warn if multiple consumers and no wiring service defined
 	if (! wiring && config.wires[0].length > 1)
@@ -35,7 +36,7 @@ module.exports = function(RED) {
 	// delay invocation, wait for other nodes to be created (min: 100 ms)
 	var delay = 100 + parseInt(config.delay);
 	setTimeout( function() {
-	    if (wiring === null)
+	    if (wiring == null)
 		connect_directly(node, config, ic);
 	    else
 		connect_using_service(node, config, wiring);
@@ -61,8 +62,13 @@ module.exports = function(RED) {
 	observer = RED.nodes.getNode(observer).addr;
 	observer = string_to_address(observer);
 	proxy.setObserver(observer)
-	     .then(on_success)
-	     .exception(on_exception);
+	     .then(function() {
+		 node.status({fill: "green", shape: "ring", text: "observer set"});
+	     })
+	     .exception(function(ex) {
+		 node.status({fill: "red", shape: "ring", text: "ERROR"});
+		 node.error(ex.toString());
+	     });
     }
 
     function connect_using_service(node, config, wiring) {
@@ -81,19 +87,13 @@ module.exports = function(RED) {
 	}
 
 	Ice.Promise.all(promises)
-	   .then(on_success)
-	   .exception(on_exception);
-    }
-
-    function on_success() {
-	var msg = "observer set";
-	node.status({fill: "green", shape: "ring", text: msg});
-    }
-
-    function on_exception(ex) {
-	var msg = ex.toString();
-	node.status({fill: "red", shape: "ring", text: "ERROR"});
-	node.error(msg);
+	   .then(function() {
+	       node.status({fill: "green", shape: "ring", text: "observer set"});
+	   })
+	   .exception(function(ex) {
+	       node.status({fill: "red", shape: "ring", text: "ERROR"});
+	       node.error(ex.toString());
+	   });
     }
 
     function string_to_address(s) {
