@@ -1,0 +1,78 @@
+<!-- -*- coding: utf-8 -*- -->
+
+<script type="text/javascript">
+ RED.nodes.registerType('IString in', {
+     category: 'IDM',
+     color: '#F06292',
+     defaults: {
+	 name: {value: ""},
+	 addr: {value: "", required: true},
+	 router: {value: "", required: true, type: "idm-router"},
+	 adapter: {value: "", required: true, type: "ice-adapter"},
+     },
+     inputs:0,
+     outputs:1,
+     icon: "text.png",
+
+     label: function() {
+	 var retval = "";
+	 if (this.name) {
+	     retval += this.name;
+	     if (this.addr)
+		 retval += " [" + this.addr + "]";
+	 }
+	 else if (this.addr)
+	     retval = this.addr.toUpperCase();
+	 else
+	     retval = "IString";
+	 return retval;
+     },
+ });
+</script>
+
+<script type="text/x-red" data-template-name="IString in">
+  <div class="form-row">
+    <label for="node-input-addr"><i class="fa fa-fw fa-suitcase"></i> Destination: </label>
+    <input type="text" id="node-input-addr" placeholder="aa:bb">
+  </div>
+
+  <div class="form-row">
+    <label for="node-input-router"><i class="fa fa-fw fa-map-signs"></i> IDM Router: </label>
+    <input type="text" id="node-input-router">
+  </div>
+
+  <div class="form-row">
+    <label for="node-input-adapter"><i class="fa fa-fw fa-gears"></i> Ice Adapter: </label>
+    <input type="text" id="node-input-adapter">
+ </div>
+
+ <div class="form-row">
+   <label for="node-input-name"><i class="fa fa-fw fa-tag"></i> Name: </label>
+   <input type="text" id="node-input-name">
+ </div>
+</script>
+
+<script type="text/x-red" data-help-name="IString in">
+  <p>This node creates a servant of DUO.IDM.IString.W, and registers it on IDM.</p>
+
+  <p>It has three properties that should be set:</p>
+  <ul>
+    <li><b>Address</b>: this object's IDM address (like <code>10:01</code>)</li>
+    <li><b>IDM Router</b>: the IDM router where it will be announced </li>
+    <li><b>Ice Adapter</b>: the Ice object adapter where to register this servant</li>
+  </ul>
+
+  <p>The <code>DUO.IDM.IString.W</code> interface is the following:
+    <pre>
+ module IString {
+     interface W {
+	 void set(string v, IDM::Address source);
+     };
+ };
+    </pre>
+  </p>
+
+  <p>When the method 'set' is called, it will inject a new <code>msg</code> with <code>v</code> (the value given on 'set') as <code>msg.payload</code>.
+  </p>
+
+</script>

@@ -5,9 +5,8 @@ var DUO = require("duo_idm").DUO;
 module.exports = function(RED) {
 
     function DUOIIntClientNode(config) {
- 	RED.nodes.createNode(this, config);
 	var node = this;
-
+ 	RED.nodes.createNode(this, config);
  	node.addr = config.addr.toUpperCase();
 
  	var router_config = RED.nodes.getNode(config.router);
@@ -36,7 +35,9 @@ module.exports = function(RED) {
 	    }
 
  	    // call set(state) on proxy
- 	    proxy.set(value, "");
+ 	    proxy.set(value, "")
+		 .then(function() { node.log(node.addr + ".set called"); })
+		 .exception(function(e) { node.error("ERROR: " + e.toString()); });
  	});
     }
 
