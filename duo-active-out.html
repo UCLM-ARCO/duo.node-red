@@ -1,0 +1,101 @@
+<!-- -*- coding: utf-8 -*- -->
+
+<script type="text/javascript">
+ RED.nodes.registerType('Active out', {
+     category: 'IDM',
+     color: '#2196F3',
+     defaults: {
+	 name: {value: ""},
+	 addr: {value: "", required: true},
+	 observer: {value: ""},
+	 observer_type: {value: "", required: true},
+	 router: {value: "", required: true, type: "idm-router"},
+	 adapter: {value: "", required: true, type: "ice-adapter"},
+	 ic: {value: "", required: true, type: "ice-communicator"},
+     },
+     inputs:1,
+     outputs:0,
+     icon: "chain.png",
+     align: 'right',
+
+     label: function() {
+	 var addr = this.addr.toUpperCase();
+	 var retval = "";
+	 if (this.name) {
+	     retval += this.name;
+	     if (addr)
+		 retval += " [" + addr + "]";
+	 }
+	 else {
+	     retval = addr || "Active";
+	 }
+
+	 if (this.observer)
+	     retval += " > " + this.observer.toUpperCase();
+	 return retval;
+     },
+
+     oneditprepare: function() {
+	 var select = $("#select-observer-type");
+	 select.change(function() {
+	     select.val() ? select.removeClass("input-error") : select.addClass("input-error");
+	 });
+
+	 select.val(this.observer_type);
+	 select.change();
+     },
+
+     oneditsave: function() {
+	 var val = $("#select-observer-type").val();
+	 this.observer_type = val || "";
+     },
+ });
+</script>
+
+<script type="text/x-red" data-template-name="Active out">
+  <div class="form-row">
+    <label for="node-input-addr"><i class="fa fa-fw fa-suitcase"></i> Address: </label>
+    <input type="text" id="node-input-addr" placeholder="aa:bb">
+  </div>
+
+  <div class="form-row">
+    <label for="node-input-observer"><i class="fa fa-fw fa-eye"></i> Observer: </label>
+    <input type="text" id="node-input-observer" placeholder="ee:ff">
+  </div>
+
+  <div class="form-row">
+    <label for="select-observer-type"><i class="fa fa-fw fa-flask"></i> Type: </label>
+    <select id="select-observer-type">
+      <option value="ibool">DUO::IDM::IBool</option>
+      <option value="iint">DUO::IDM::IInt</option>
+      <option value="istring">DUO::IDM::IString</option>
+    </select>
+    <input type="hidden" id="node-input-observer-type">
+  </div>
+
+  <hr>
+
+  <div class="form-row">
+    <label for="node-input-router"><i class="fa fa-fw fa-map-signs"></i> IDM Router: </label>
+    <input type="text" id="node-input-router">
+  </div>
+
+  <div class="form-row">
+    <label for="node-input-adapter"><i class="fa fa-fw fa-gears"></i> Ice Adapter: </label>
+    <input type="text" id="node-input-adapter">
+  </div>
+
+  <div class="form-row">
+    <label for="node-input-ic"><i class="fa fa-fw fa-gears"></i> Ice Comm.: </label>
+    <input type="text" id="node-input-ic">
+  </div>
+
+  <div class="form-row">
+    <label for="node-input-name"><i class="fa fa-fw fa-tag"></i> Name: </label>
+    <input type="text" id="node-input-name">
+  </div>
+</script>
+
+<script type="text/x-red" data-help-name="Active out">
+ <p>DUO.Active.W servant node.</p>
+</script>

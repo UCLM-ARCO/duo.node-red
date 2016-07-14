@@ -27,19 +27,6 @@
 	     retval = "Active";
 	 return retval;
      },
-
-     oneditprepare: function() {
-	 var node = this;
-	 console.info(node);
-	 RED.nodes.eachConfig(function(c) {
-	     if (!node.router) {
-		 if (c.type == "idm-router") {
-		     node.router = c;
-		     console.info("set router to:", c);
-		 }
-	     }
-	 });
-     },
  });
 </script>
 
@@ -76,5 +63,5 @@
 </script>
 
 <script type="text/x-red" data-help-name="Active in">
- <p>DUO.Active.W node</p>
+ <p>DUO.Active.W client node.</p>
 </script>

@@ -1,3 +1,5 @@
+// -*- coding: utf-8 -*-
+
 _ = console.info.bind(console);
 
 var Ice = require("ice").Ice;
