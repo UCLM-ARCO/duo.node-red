@@ -33,12 +33,9 @@ module.exports = function(RED) {
     function DUOIBoolServerNode(config) {
 	RED.nodes.createNode(this, config);
 	var node = this;
-	var status_ready =    {fill: 'green',  shape: 'ring', text: 'ready'};
-	var status_starting = {fill: 'yellow', shape: 'ring', text: 'starting...'};
-	var status_error =    {fill: 'red',    shape: 'ring', text: 'error!'};
 
  	node.addr = config.addr.toUpperCase();
-	node.status(status_starting);
+	set_status(node, "starting");
 
  	var router_config = RED.nodes.getNode(config.router);
  	var adapter_node = RED.nodes.getNode(config.adapter);
@@ -50,12 +47,12 @@ module.exports = function(RED) {
 	    adapter.add(servant, node.addr.replace(":", ""))
 		   .then(function(prx) {
 		       node.log("servant added, oid: " + prx.ice_getIdentity().name);
-		       node.status(status_ready);
+		       set_status(node, "ready")
 		       register_on_router(prx);
 		   })
 		   .exception(function(ex) {
 		       node.error(ex.toString());
-		       node.status(status_error);
+		       set_status(node, "error");
 		   });
 	});
 
@@ -73,6 +70,16 @@ module.exports = function(RED) {
 		      node.error(ex.toString());
 		  });
 	}
+    }
+
+    function set_status(node, status) {
+	var configs = {
+	    ready: {fill: 'green',  shape: 'ring', text: 'ready'},
+	    starting: {fill: 'yellow', shape: 'ring', text: 'starting...'},
+	    error: {fill: 'red',    shape: 'ring', text: 'error!'},
+	};
+
+	node.status(configs[status]);
     }
 
     RED.nodes.registerType("IBool in", DUOIBoolServerNode);
