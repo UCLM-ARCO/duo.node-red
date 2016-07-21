@@ -61,6 +61,13 @@ module.exports = function(RED) {
 	var observer = config.wires[0][0];
 	observer = RED.nodes.getNode(observer).addr;
 	observer = string_to_address(observer);
+	if (observer == null) {
+	    node.status({fill: "red", shape: "ring", text: "ERROR"});
+	    node.error("Invalid observer address!");
+	    return;
+	}
+
+	node.log("set observer to '" + observer.toString("hex") + "'");
 	proxy.setObserver(observer)
 	     .then(function() {
 		 node.status({fill: "green", shape: "ring", text: "observer set"});
@@ -97,10 +104,16 @@ module.exports = function(RED) {
     }
 
     function string_to_address(s) {
-	var fields = s.split(":");
+	s = s.trim().replace(":", "");
+
 	var addr = [];
-	for (var i in fields)
-	    addr.push(parseInt(fields[i], 16));
+	for (var i=0; i<=s.length/2; i=i+2) {
+	    var c = s[i] + s[i+1];
+	    if (! (/^(\-|\+)?([0-9a-fA-F]+|Infinity)$/.test(c)))
+		return null;
+	    addr.push(parseInt(c, 16));
+	}
+
 	return new Buffer(addr);
     }
 
