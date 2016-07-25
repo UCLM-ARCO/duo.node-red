@@ -14,7 +14,7 @@ module.exports = function(RED) {
 
 	set: function(value, source) {
 	    source = this.address_to_string(source);
-	    this.node.send({payload: value, source: source});
+	    this.node.send({payload: value, source: source, topic: this.node.topic});
 	},
 
 	address_to_string: function(addr) {
@@ -35,6 +35,7 @@ module.exports = function(RED) {
 	var node = this;
 
  	node.addr = config.addr.toUpperCase();
+	node.topic = config.topic;
 	set_status(node, "starting");
 
  	var router_config = RED.nodes.getNode(config.router);

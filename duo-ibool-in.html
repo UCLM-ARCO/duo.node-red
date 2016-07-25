@@ -4,6 +4,7 @@
      color: '#a6bb00',
      defaults: {
 	 name: {value: ""},
+	 topic: {value: ""},
 	 addr: {value: "", required: true},
 	 router: {value: "", required: true, type: "idm-router"},
 	 adapter: {value: "", required: true, type: "ice-adapter"},
@@ -23,6 +24,9 @@
 	     retval = this.addr.toUpperCase();
 	 else
 	     retval = "IBool";
+
+	 if (this.topic)
+	     retval = this.topic + ": " + retval;
 	 return retval;
      },
  });
@@ -42,12 +46,17 @@
   <div class="form-row">
     <label for="node-input-adapter"><i class="fa fa-fw fa-gears"></i> Ice Adapter: </label>
     <input type="text" id="node-input-adapter">
- </div>
+  </div>
 
- <div class="form-row">
-   <label for="node-input-name"><i class="fa fa-fw fa-tag"></i> Name: </label>
-   <input type="text" id="node-input-name">
- </div>
+  <div class="form-row">
+    <label for="node-input-topic"><i class="fa fa-fw fa-tasks"></i> Topic:</label>
+    <input type="text" id="node-input-topic">
+  </div>
+
+  <div class="form-row">
+    <label for="node-input-name"><i class="fa fa-fw fa-tag"></i> Name: </label>
+    <input type="text" id="node-input-name">
+  </div>
 </script>
 
 <script type="text/x-red" data-help-name="IBool in">
