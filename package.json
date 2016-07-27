@@ -1,6 +1,6 @@
 {
   "name": "node-red-contrib-idm",
-  "version": "0.3.4",
+  "version": "0.4.0",
   "description": "Nodes for IDM: configuration and DUO.IBool",
   "homepage": "https://bitbucket.org/arco_group/idm",
   "dependencies": {
@@ -17,6 +17,7 @@
       "IString in": "duo-istring-in.js",
       "IString out": "duo-istring-out.js",
       "toggle in": "toggle-in.js",
+      "toggle out": "toggle-out.js",
       "ice-adapter": "ice-adapter-config.js",
       "ice-communicator": "ice-communicator-config.js",
       "idm-router": "idm-router-config.js",
