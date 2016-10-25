@@ -1,0 +1,79 @@
+<script type="text/javascript">
+ RED.nodes.registerType('IByte out', {
+     category: 'IDM',
+     color: '#B39DDB',
+     defaults: {
+	 name: {value: ""},
+	 addr: {value: "", required: true},
+	 router: {value: "", required: true, type: "idm-router"},
+	 ic: {value: "", required: true, type: "ice-communicator"},
+     },
+     inputs:1,
+     outputs:0,
+     icon: "0xf.png",
+     align: 'right',
+
+     label: function() {
+	 var retval = "";
+	 if (this.name) {
+	     retval += this.name;
+	     if (this.addr)
+		 retval += " [" + this.addr + "]";
+	 }
+	 else if (this.addr)
+	     retval = this.addr.toUpperCase();
+	 else
+	     retval = "IByte";
+	 return retval;
+     },
+ });
+</script>
+
+<script type="text/x-red" data-template-name="IByte out">
+  <div class="form-row">
+    <label for="node-input-addr"><i class="fa fa-fw fa-suitcase"></i> Address: </label>
+    <input type="text" id="node-input-addr" placeholder="aa:bb">
+  </div>
+
+  <div class="form-row">
+    <label for="node-input-router"><i class="fa fa-fw fa-map-signs"></i> IDM Router: </label>
+    <input type="text" id="node-input-router">
+  </div>
+
+  <div class="form-row">
+    <label for="node-input-ic"><i class="fa fa-fw fa-gears"></i> Ice Comm.: </label>
+    <input type="text" id="node-input-ic">
+  </div>
+
+  <div class="form-row">
+    <label for="node-input-name"><i class="fa fa-fw fa-tag"></i> Name: </label>
+    <input type="text" id="node-input-name">
+  </div>
+</script>
+
+<script type="text/x-red" data-help-name="IByte out">
+  <p>This node provides access to an IByte.W object, through IDM.</p>
+
+  <p>It has three properties that should be set:</p>
+  <ul>
+    <li><b>Address</b>: the destination IDM address (like <code>10:01</code>)</li>
+    <li><b>IDM Router</b>: the router to use</li>
+    <li><b>Ice Comm.</b>: this is the ZeroC Ice communicator to be used</li>
+  </ul>
+
+  <p>When an input with payload as integer in the range [0, 255] is connected, it will
+    send a <b>set</b> message to the given destination.</p>
+
+  <p>If payload could not be coerced
+    to an byte, a warning will be displayed, and message will be discarded.</p>
+
+  <p>The <code>IByte.W</code> interface is the following:
+    <pre>
+module IByte {
+  interface W {
+    void set(byte v, IDM::Address source);
+  };
+};
+    </pre>
+  </p>
+</script>
