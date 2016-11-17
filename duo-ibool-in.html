@@ -34,7 +34,7 @@
 
 <script type="text/x-red" data-template-name="IBool in">
   <div class="form-row">
-    <label for="node-input-addr"><i class="fa fa-fw fa-suitcase"></i> Destination: </label>
+    <label for="node-input-addr"><i class="fa fa-fw fa-suitcase"></i> Address: </label>
     <input type="text" id="node-input-addr" placeholder="aa:bb">
   </div>
 
@@ -60,27 +60,42 @@
 </script>
 
 <script type="text/x-red" data-help-name="IBool in">
-  <p>This node creates a servant of DUO.IDM.IBool.W, and registers it on IDM.</p>
+  <h3><b>Overview</b></h3>
 
-  <p>It has three properties that should be set:</p>
-  <ul>
-    <li><b>Address</b>: this object's IDM address (like <code>10:01</code>)</li>
-    <li><b>IDM Router</b>: the IDM router where it will be announced </li>
-    <li><b>Ice Adapter</b>: the Ice object adapter where to register this servant</li>
-  </ul>
+  <p>This node creates a servant of <code>DUO.IBool.W</code>, and
+    registers it on <i>IDM</i>. Other clients of the <i>IDM</i> network
+    can change its state, just using its <i>IDM</i> address.</p>
 
-  <p>The <code>DUO.IDM.IBool.W</code> interface is the following:
+  <p>The <code>DUO.IDM.IBool.W</code> interface is as follows:
     <pre>
- module IBool {
-     interface W {
-	 void set(bool v, IDM::Address source);
-     };
- };
-    </pre>
-  </p>
+module IBool {
+  interface W {
+    void set(bool v, IDM::Address source);
+  };
+};</pre></p>
 
-  <p>When the method 'set' is called, it will inject a new <code>msg</code> with <code>true</code> or <code>false</code> as <code>msg.payload</code>,
-  according to the value passed on 'set'.
-  </p>
+  <p>When the method 'set' is called, it will inject a new <code>msg</code> with
+    <code>true</code> or <code>false</code> as <code>msg.payload</code>, according to the
+    value passed on 'set'.</p>
+
+  <h3><b>Properties</b></h3>
+
+  <ul><li><b>Address</b>: this is the <i>IDM</i> address of the
+    servant. The format is two bytes in hexadacimal, separated by a colon
+    (like <code>"AA:01"</code>).</li></ul>
+
+  <ul><li><b>IDM Router</b>: the router that will be used to <i>receive</i> the
+    invocations.
+    It's a configuration node, see its 'info' tab for more details.</li></ul>
+
+  <ul><li><b>Ice Adapter</b>: this is the <i>Object Adapter</i> where
+    this servant will be attached. It works as a dispatcher to allow
+    <i>many servants</i> to share the same connection endpoints.
+    It's a configuration node, see its 'info' tab for more details.</li></ul>
+
+  <ul><li><b>Topic</b>: the name of the <code>topic</code> property
+    in the injected message.</li></ul>
+
+  <ul><li><b>Name</b>: the name of this node.</li></ul>
 
 </script>

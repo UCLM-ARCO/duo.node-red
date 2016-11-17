@@ -96,4 +96,10 @@ Node-RED.
 Other useful nodes
 ------------------
 
-* `toggle in/out`
+* `toggle in`: a simple toggle button to provide input from the
+  Node-RED editor. It does not send a predefinded state, but changes
+  its state on each click.
+
+* `toggle out`: a simple widget to show the payload of the last
+  message. It changes its status to 'true', if payload can be
+  coerced to `true`, otherwise it will show 'false'.

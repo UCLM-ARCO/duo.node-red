@@ -52,26 +52,38 @@
 </script>
 
 <script type="text/x-red" data-help-name="IBool out">
-  <p>This node provides access to an IBool.W object, through IDM.</p>
+  <h3><b>Overview</b></h3>
 
-  <p>It has three properties that should be set:</p>
-  <ul>
-    <li><b>Address</b>: the destination IDM address (like <code>10:01</code>)</li>
-    <li><b>IDM Router</b>: the router to use</li>
-    <li><b>Ice Comm.</b>: this is the ZeroC Ice communicator to be used</li>
-  </ul>
+  <p>This node provides a client for <code>DUO.IBool.W</code> objects,
+    using the <i>IDM</i> network.</p>
 
-  <p>When an input with payload <code>true</code> or <code>false</code> is
-    connected, it will send a <b>set</b> message to the given destination</p>.
-  If payload is different, it will be coerced to <code>false</code>.
-
-  <p>The <code>IBool.W</code> interface is the following:
+  <p>The <code>DUO.IBool.W</code> interface is as follows:
     <pre>
 module IBool {
   interface W {
     void set(bool v, IDM::Address source);
   };
-};
-    </pre>
-  </p>
+};</pre></p>
+
+  <p>When a message with payload <code>true</code> or <code>false</code> arrives
+    on input, it will call the method 'set' on the given destination.
+    If the payload is different, it will be coerced to <code>false</code>.</p>
+
+  <h3><b>Properties</b></h3>
+
+  <ul><li><b>Address</b>: this is the <i>IDM</i> address of the
+    destination. The object with this address will be called upon
+    correct message arrival. The format is two bytes in hexadacimal,
+    separated by a colon (like <code>"AA:01"</code>).</li></ul>
+
+  <ul><li><b>IDM Router</b>: the router that will be used to <i>send</i> the
+    invocations.
+    It's a configuration node, see its 'info' tab for more details.</li></ul>
+
+  <ul><li><b>Ice Communicator</b>: the main broker of the communications <b>engine</b>.
+    Usually, you will have just one of this.
+    It's a configuration node, see its 'info' tab for more details.</li></ul>
+
+  <ul><li><b>Name</b>: the name of this node.</li></ul>
+
 </script>

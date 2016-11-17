@@ -95,5 +95,41 @@
 </script>
 
 <script type="text/x-red" data-help-name="Active out">
- <p>DUO.Active.W servant node.</p>
+  <h3><b>Overview</b></h3>
+
+  <p>The <code>Active servant</code> provides the implementation of the <i>Active</i>
+    interface. It allows you to create a servant that can have an <i>IDM</i>
+    observer. When some message arrives to the input, the observer
+    will be invoked (but only if the payload could be coerced to the
+    selected type). </p>
+
+  <h3><b>Properties</b></h3>
+
+  <ul><li><b>Address</b>: this is the <i>IDM</i> address of the
+    servant. This address is how other objects in the network will
+    reach this servant. The format is two bytes in hexadacimal,
+    separated by a colon (like <code>"AA:01"</code>).</li></ul>
+
+  <ul><li><b>Observer</b>: the initial address of the observer. It's an <i>IDM</i> address. You
+    could left it empty. It would be overwritten if some other client
+    sets it.</li></ul>
+
+  <ul><li><b>Type</b>: the data type of this servant. You can select
+    from the available options. Note that the observer <b>must implement</b>
+    the same interface.</li></ul>
+
+  <ul><li><b>IDM Router</b>: the router that will be used to <i>send</i> or <i>receive</i> the
+    invocations.
+    It's a configuration node, see its 'info' tab for more details.</li></ul>
+
+  <ul><li><b>Ice Adapter</b>: this is the <i>Object Adapter</i> where
+    this servant will be attached. It works as a dispatcher to allow
+    <b>many servants</b> to share the same connection endpoints.
+    It's a configuration node, see its 'info' tab for more details.</li></ul>
+
+  <ul><li><b>Ice Communicator</b>: the main broker of the communications <b>engine</b>.
+    Usually, you will have just one of this.
+    It's a configuration node, see its 'info' tab for more details.</li></ul>
+
+  <ul><li><b>Name</b>: the name of this node.</li></ul>
 </script>

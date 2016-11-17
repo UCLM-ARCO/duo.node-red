@@ -63,5 +63,38 @@
 </script>
 
 <script type="text/x-red" data-help-name="Active in">
- <p>DUO.Active.W client node.</p>
+  <h3><b>Overview</b></h3>
+
+  <p><code>Active client</code> is used to establish the observer of a <code>DUO.Active</code>
+    servant. Using this client, you can attach an observer that will be
+    notified about any change.</p>
+
+  <p><b>Example</b>: you have an <code>Active</code> light and you want to
+    know when someone switchs it on or off. You can connect a <i>boolean</i>
+    servant to that light, and receive an invocation every time it
+    changes its state.</p>
+
+  <h3><b>Properties</b></h3>
+
+  <ul><li><b>Address</b>: this is the <i>IDM</i> address of the
+    object that you want to change its observer. The format is two
+    bytes in hexadacimal, separated by a colon (like <code>"AA:01"</code>).</li></ul>
+
+  <ul><li><b>IDM Router</b>: the router that will be used to <b>send</b> the
+    invocation to the actual <i>Active</i> object.
+    It's a configuration node, see its 'info' tab for more details.</li></ul>
+
+  <ul><li><b>Ice Communicator</b>: the main broker of the communications <b>engine</b>.
+    Usually, you will have just one of this.
+    It's a configuration node, see its 'info' tab for more details.</li></ul>
+
+  <ul><li><b>Delay</b>: delayed time before performing the invocation. Given in
+    milliseconds.</li></ul>
+
+  <ul><li><b>Wiring Service</b>: you may want more than one observer for the same
+    <i>Active</i> object. In that case, the <i>wiring</i> should be
+    done differently. This service handles everything to accomplish it.
+    It's a configuration node, see its 'info' tab for more details.</li></ul>
+
+  <ul><li><b>Name</b>: the name of this node.</li></ul>
 </script>
