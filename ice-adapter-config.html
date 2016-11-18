@@ -102,3 +102,29 @@
     <input type="text" id="node-config-input-name">
   </div>
 </script>
+
+<script type="text/x-red" data-help-name="ice-adapter">
+ <h3><b>Overview</b></h3>
+
+ <h3><b>Properties</b></h3>
+ <ul><li><b>Host</b>: the address where this Object Adapter will
+   listen. This usually would be the IP address of one of the network
+   interfaces where Node-RED is deployed. If you want to listen in all
+   interfaces, set it to <code>0.0.0.0</code>, which is the default value.
+ </li></ul>
+
+ <ul><li><b>Port</b>: this is the TCP port where the Adapter will listen. Set it to a
+   free port, and take into account that ports below 1024 usually are restricted.</li></ul>
+
+ <ul><li><b>Adapter Properties</b>: here you can define a collection of properties that
+   are specific to Ice Object Adapters. The most common property you would set is
+   the <code>Adapter.PublishedEndpoints</code>. For a full reference of available properties,
+   see <a href="https://doc.zeroc.com/display/Ice36/Property+Reference">ZeroC Ice Property
+   Reference</a>.</li></ul>
+
+ <ul><li><b>Ice Communicator</b>: the name of the main broker you will use. <b>Note</b>:
+   this communicator should be already created somewhere else (usually,
+   in the node that uses this configuration), and here you just name it.</li></ul>
+
+ <ul><li><b>Name</b>: this node's name.</li></ul>
+</script>

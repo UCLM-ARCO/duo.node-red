@@ -31,3 +31,26 @@
    <input type="text" id="node-config-input-name">
  </div>
 </script>
+
+<script type="text/x-red" data-help-name="idm-router">
+  <h3><b>Overview</b></h3>
+
+  <p>This is the configuration node for an <i>IDM</i> router. This router will be the
+    connection point with your <i>IDM</i> network. It may be deployed anywhere, so this
+    configuration is not restricted to your machine. Of course, it should be accesible
+    by Node-RED.</p>
+
+  <h3><b>Properties</b></h3>
+  <ul><li><b>Address</b>: this is the <i>IDM</i> address of the router. The format is two
+    bytes in hexadacimal, separated by a colon (like <code>"AA:01"</code>).</li></ul>
+
+  <ul><li><b>Host</b>: the host were the <i>IDM</i> router is running. It could be a
+    name (FQDN) or an IP address (both IPv4 and IPv6).</li></ul>
+
+  <ul><li><b>Port</b>: the TCP port (as a number) where the <i>IDM</i> router is listening.
+  </li></ul>
+
+  <ul><li><b>Name</b>: a name for this router. Usually, you put here
+    the name of the machine where the router is running, just to help you
+    remember the settings.</li></ul>
+</script>

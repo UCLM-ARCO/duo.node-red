@@ -45,10 +45,19 @@
 </script>
 
 <script type="text/x-red" data-help-name="toggle in">
+  <h3><b>Overview</b></h3>
+
   <p>A simple toggle button to provide input from the Node-RED
-  editor. It does not send a predefinded state, but changes its state
+    editor. It does not send a predefinded value, but changes its state
     on each click.</p>
 
-  <p>It send messages with <code>payload</code> set to <code>true</code> or <code>false</code>.
-  </p>
+  <p>It send messages with <code>payload</code> set to <code>true</code> or <code>false</code>,
+    depending on the widget state.</p>
+
+  <h3><b>Properties</b></h3>
+
+  <ul><li><b>Topic</b>: the Node-RED 'topic' atribute for the message.</li></ul>
+
+  <ul><li><b>Name</b>: this node's name.</li></ul>
+
 </script>

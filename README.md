@@ -23,7 +23,7 @@ IDM](https://arcoresearchgroup.wordpress.com/2016/09/06/infraestructura-iot-con-
 Installation of dependencies on Debian
 ======================================
 
-First, set up the APT repository (http://pike.esi.uclm.es/) using:
+First, set up the APT repository [http://pike.esi.uclm.es](http://pike.esi.uclm.es) using:
 
     wget -qO- http://pike.esi.uclm.es/add-pike-repo.sh | sudo sh
 
