@@ -2,7 +2,7 @@
 
 _ = console.info.bind(console);
 
-var DUO = require("duo_idm").DUO;
+var DUO = require("idm-slice/duo_idm").DUO;
 
 module.exports = function(RED) {
 

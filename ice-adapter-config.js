@@ -1,7 +1,7 @@
 _ = console.info.bind(console);
 
 var Ice = require("ice").Ice;
-var Utils = require("remote-adapter").Utils;
+var Utils = require("idm-slice/remote-adapter").Utils;
 var spawn = require('child_process').spawn;
 var path = require("path");
 

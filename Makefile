@@ -8,10 +8,10 @@ run: depends
 	node-red -v
 
 # NOTE: install locally, because I'm having trouble with global installation
-depends:
+install-depends:
 	[ -d node_modules/ice ] || npm install ice
 
-upload: clean slices
+upload: clean
 	npm --userconfig=~/.npmrc-uclm publish
 
 .PHONY: clean

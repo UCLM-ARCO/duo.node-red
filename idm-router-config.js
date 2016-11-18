@@ -1,4 +1,4 @@
-var IDM = require("idm/idm").IDM;
+var IDM = require("idm-slice/idm").IDM;
 
 module.exports = function(RED) {
 

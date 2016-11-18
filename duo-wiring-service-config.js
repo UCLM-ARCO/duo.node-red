@@ -1,4 +1,4 @@
-var DUO = require("duo_wiring").DUO;
+var DUO = require("idm-slice/duo_wiring").DUO;
 
 _ = console.info.bind(console);
 module.exports = function(RED) {

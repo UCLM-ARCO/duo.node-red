@@ -1,10 +1,8 @@
 var Ice = require("ice").Ice;
+var DUO = require("idm-slice/duo_idm").DUO;
 
 _ = console.info.bind(console);
 module.exports = function(RED) {
-
-    // load duo_idm.ice
-    var DUO = require("duo_idm").DUO;
 
     function DUOActiveInputNode(config) {
 	RED.nodes.createNode(this, config);
