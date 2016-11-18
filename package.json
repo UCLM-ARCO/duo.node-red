@@ -3,7 +3,9 @@
   "version": "0.4.5",
   "description": "Nodes for IDM and DUO",
   "homepage": "https://bitbucket.org/arco_group/idm",
+  "author": "Arco Research Group - University of Castilla-La Mancha",
   "dependencies": {
+    "idm-slice": "*",
     "ice": ">=3.6.1"
   },
   "keywords": [
@@ -34,11 +36,5 @@
       "idm-router": "idm-router-config.js",
       "duo-wiring-service": "duo-wiring-service-config.js"
     }
-  },
-  "bundledDependencies": [
-    "duo_wiring.js",
-    "duo_idm.js",
-    "idm",
-    "remote-adapter.js"
-  ]
+  }
 }
