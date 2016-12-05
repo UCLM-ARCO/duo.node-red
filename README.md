@@ -17,8 +17,7 @@ can send the payload to a remote servant (implemented somewhere: on an
 Arduino, a Raspberry Pi, another Node-RED, etc). The servant will
 allow you to receive this type of message.
 
-For more information about IDM, see [Infraestructura IoT con
-IDM](https://arcoresearchgroup.wordpress.com/2016/09/06/infraestructura-iot-con-idm/).
+For more information about IDM, see [IoT infrastructure with IDM](https://arcoresearchgroup.wordpress.com/2016/11/29/iot-infrastructure-with-idm/).
 
 Installation of dependencies on Debian
 ======================================
