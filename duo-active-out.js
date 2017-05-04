@@ -63,8 +63,12 @@ module.exports = function(RED) {
  	var node = this;
  	RED.nodes.createNode(this, config);
 	node.addr = config.addr.toUpperCase();
-	node.observer = config.observer.trim().replace(":", "").toUpperCase();
 	node.observer_type = config.observer_type;
+
+	if (config.observer)
+	    node.observer = config.observer.trim().replace(":", "").toUpperCase();
+	else
+	    node.observer = "";
 
 	var status_ready =    {fill: 'green',  shape: 'ring', text: 'ready'};
 	var status_starting = {fill: 'yellow', shape: 'ring', text: 'starting...'};

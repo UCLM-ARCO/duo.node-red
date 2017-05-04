@@ -102,6 +102,7 @@ module.exports = function(RED) {
     }
 
     function string_to_address(s) {
+	if (!s) return null;
 	s = s.trim().replace(":", "");
 
 	var addr = [];
